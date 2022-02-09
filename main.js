@@ -6,12 +6,8 @@ function errorMessage(error) {
 }
 
 //this function adds tables and stuff to html doc
-let appendToHtml = (htmlLocation) => {
-    return (
-        `<div>
-            <!--stuff to append goes here-->
-        </div>`
-    )
+let appendToHtml = (movieLibrary) => {
+    return `<div>${movieLibrary.title}</div>`
 }
 
 //this function does the fetch request from the API to recieve movie info
@@ -19,7 +15,23 @@ function moviesRequest() {
 
     fetch(url)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(movies => {
+            console.log(movies)
+            movies.forEach(movie => {
+                //we created our own library
+                let movieLib = {
+                    title: movie.title,
+                    rating: movie.rating,
+                    poster: movie.poster,
+                    year: movie.year,
+                    genre: movie.genre,
+                    directors: movie.directors,
+                    actors: movie.actors
+                }
+                //append to html here
+/*                $('data').append(appendToHtml(movieLib))*/
+            })
+        })
         .catch(error => errorMessage(error));
 
 
@@ -29,7 +41,7 @@ moviesRequest(); //for testing
 
 //this function adds a new movie by post request
 function addNewMovie() {
-    let data = { title: 'movie-title' };
+    let data = {title: 'movie-title'};
 
     fetch('https://example.com/profile', {
         method: 'POST', // or 'PUT'
@@ -45,4 +57,13 @@ function addNewMovie() {
         .catch((error) => {
             console.error('Error:', error);
         });
+}
+//add a scroll animation to the page
+function scrollCurtainAnimation () {
+    let scrollTarget = document.getElementsByClassName('scrollTarget');
+    window.document.addEventListener('scroll', function () {
+        if(window.scrollY > scrollTarget.scrollY) {
+            scrollTarget.classList.add('curtain_left curtain_right');
+        }
+    })
 }
