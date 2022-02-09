@@ -9,7 +9,7 @@ function errorMessage(error) {
 let appendToHtml = (htmlLocation) => {
     return (
         `<div>
-            {/*stuff to append*/}
+            <!--stuff to append goes here-->
         </div>`
     )
 }
@@ -24,9 +24,25 @@ function moviesRequest() {
 
 
 }
-moviesRequest();
+
+moviesRequest(); //for testing
 
 //this function adds a new movie by post request
 function addNewMovie() {
+    let data = { title: 'movie-title' };
 
+    fetch('https://example.com/profile', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
