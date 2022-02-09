@@ -1,5 +1,3 @@
-# Movies-App
-Application about movies
 
 # Movies Application
 
