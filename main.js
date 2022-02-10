@@ -5,10 +5,10 @@ function errorMessage(error) {
     console.log('error')
     //append some error message to html page
 }
+
 //this function adds tables and stuff to html doc
 let appendToHtml = (title, rating, poster, year, genre, directors, actors) => {
     return `
-   
     <div class="card h-100">
     ${hasPoster(poster)}
         <div class="card-body text-center">
@@ -23,7 +23,7 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors) => {
     </div>
 
     <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <button class="btn btn-sm btn-secondary mx-1">Edit</button><button class=" btn btn-sm btn-danger mx-1">Remove</button>
     </div>
  </div>
 `
@@ -41,8 +41,8 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors) => {
 
 }
 
-let isUndefined = (content) =>{
-    if(content === undefined) {
+let isUndefined = (content) => {
+    if (content === undefined) {
         return ''
     } else {
         return content
@@ -50,12 +50,13 @@ let isUndefined = (content) =>{
 }
 
 let hasPoster = poster => {
-    if(poster === undefined){
+    if (poster === undefined) {
         return ''
     } else {
         return `<img src="${poster}" class="card-img-top" style="width=200; height=300px;"  alt="...">`
     }
 }
+
 //this function does the fetch request from the API to receive movie info
 function moviesRequest() {
     /*  loading();*/
@@ -66,18 +67,19 @@ function moviesRequest() {
             /*  clearLoading();*/
             movies.forEach(movie => {
                 //we created our own library
-                    let title = movie.title
-                    let rating = movie.rating
-                    let poster = movie.poster
-                    let year = movie.year
-                    let genre = movie.genre
-                    let directors = movie.directors
-                    let actors = movie.actors
+                let title = movie.title
+                let rating = movie.rating
+                let poster = movie.poster
+                let year = movie.year
+                let genre = movie.genre
+                let directors = movie.directors
+                let actors = movie.actors
                 $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors))
             })
         })
         .catch(error => errorMessage(error));
 }
+
 //this function adds a new movie by post request
 function addNewMovie(data) {
     data = {title: 'movie-title'};
@@ -97,8 +99,9 @@ function addNewMovie(data) {
             console.error('Error:', error);
         });
 }
+
 //when you click the button, it gets the user data into the POST request.
-$('#addNewMovie').click( e => {
+$('#addNewMovie').click(e => {
     e.preventDefault()
     let data = $('#movieInfo').val();
     addNewMovie(data);
@@ -136,8 +139,10 @@ for (const button of buttons) {
 //makes a loading spinner via bootstrap.
 function loading() {
     let spinner =
-        `<div class="spinner-border" role="status">
-<span class="sr-only">Loading...</span>
+        `<div class="text-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </div>`
     $('#loading').append(spinner);
 }
