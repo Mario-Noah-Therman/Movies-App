@@ -8,14 +8,37 @@ function errorMessage(error) {
 //this function adds tables and stuff to html doc
 let appendToHtml = (title, rating, poster, year, genre, directors, actors) => {
     return `
-<div>${isUndefined(title)}</div>
-<div>${isUndefined(rating)}</div>
-<div>${hasPoster(poster)}</div>
-<div>${isUndefined(year)}</div>
-<div>${isUndefined(genre)}</div>
-<div>${isUndefined(directors)}</div>
-<div>${isUndefined(actors)}</div>
+   
+    <div class="card h-100">
+    ${hasPoster(poster)}
+        <div class="card-body text-center">
+        <h5>${isUndefined(title)}</h5>
+        <p class="card-text">
+        ${isUndefined(rating)}<br>
+        ${isUndefined(year)}<br>
+        ${isUndefined(genre)}<br>
+        ${isUndefined(directors)}<br>
+        ${isUndefined(actors)}<br>
+        </p>
+    </div>
+
+    <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+ </div>
 `
+
+//         < div
+//     className = "card-body" >
+//         < h5
+//     className = "card-title" >${isUndefined(title)} < /h5>
+//     <div className="card-text">${isUndefined(rating)}</div>
+//     <div className="card-text">${isUndefined(year)}</div>
+//     <div className="card-text">${isUndefined(genre)}</div>
+//     <div className="card-text">${isUndefined(directors)}</div>
+//     <div className="card-text">${isUndefined(actors)}</div>
+// </div>
+
 }
 
 let isUndefined = (content) =>{
@@ -30,7 +53,7 @@ let hasPoster = poster => {
     if(poster === undefined){
         return ''
     } else {
-        return `<img src="${poster}">`
+        return `<img src="${poster}" class="card-img-top" style="width=200; height=300px;"  alt="...">`
     }
 }
 //this function does the fetch request from the API to receive movie info
@@ -136,6 +159,6 @@ function loadingInterval() {
     //where we will write functionality.
 }
 
-setTimeout(loadingInterval, 1000);
+setTimeout(loadingInterval, 0);
 
 
