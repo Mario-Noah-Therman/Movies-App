@@ -59,11 +59,16 @@ function addNewMovie() {
         });
 }
 //add a scroll animation to the page
-function scrollCurtainAnimation () {
-    let scrollTarget = document.getElementsByClassName('scrollTarget');
+    let scrollTarget = document.getElementById('targetScroll');
+    let scrollTarget2 = document.getElementById('targetScroll2')
     window.document.addEventListener('scroll', function () {
-        if(window.scrollY > scrollTarget.scrollY) {
-            scrollTarget.classList.add('curtain_left curtain_right');
+        if(window.scrollY > scrollTarget.scrollTop) {
+            console.log('active');
+            scrollTarget.classList.add('curtain_left');
+            scrollTarget2.classList.add('curtain_right');
+        } else if (window.scrollY < 50){
+            console.log('removed');
+            scrollTarget.classList.remove('curtain_left');
+            scrollTarget2.classList.remove('curtain_right');
         }
     })
-}
