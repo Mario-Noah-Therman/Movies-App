@@ -74,6 +74,7 @@ function moviesRequest() {
                 let genre = movie.genre
                 let directors = movie.directors
                 let actors = movie.actors
+                let id = movie.id
                 $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors))
             })
         })
