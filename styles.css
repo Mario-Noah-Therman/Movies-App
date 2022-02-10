@@ -65,3 +65,14 @@
     z-index: 10;
 }
 
+#loading
+{
+    position:fixed;
+    _position:absolute;
+    top: 0;
+    left:47%;
+    padding:2px 5px;
+    z-index: 5000;
+    background-color:#CF4342;
+    color:#fff;
+}

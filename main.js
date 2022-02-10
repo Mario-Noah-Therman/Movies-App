@@ -10,13 +10,15 @@ let appendToHtml = (movieLibrary) => {
     return `<div>${movieLibrary.title}</div>`
 }
 
-//this function does the fetch request from the API to recieve movie info
+//this function does the fetch request from the API to receive movie info
 function moviesRequest() {
-
+  /*  loading();*/
     fetch(url)
         .then(response => response.json())
         .then(movies => {
             console.log(movies)
+          /*  clearLoading();*/
+
             movies.forEach(movie => {
                 //we created our own library
                 let movieLib = {
@@ -36,8 +38,8 @@ function moviesRequest() {
 
 
 }
+moviesRequest();
 
-moviesRequest(); //for testing
 
 //this function adds a new movie by post request
 function addNewMovie() {
@@ -89,3 +91,30 @@ const buttons = document.getElementsByTagName('button');
 for (const button of buttons) {
     button.addEventListener('click', addRippleEffect)
 }
+
+
+
+
+/*Loading*/
+
+
+function loading () {
+    let spinner =
+        `<div className="spinner-border" role="status">
+<span className="sr-only">Loading...</span>
+</div>`
+    $('#loading').append(spinner);
+}
+function clearLoading() {
+    $('#loading').text('');
+}
+
+
+
+
+/*HTML Manipulation*/
+
+function test() {
+    $('.header-two').text('Hello Visiters')
+}
+setInterval(test, 6000);
