@@ -7,7 +7,7 @@ function errorMessage(error) {
 }
 
 //this function adds tables and stuff to html doc
-let appendToHtml = (title, rating, poster, year, genre, directors, actors) => {
+let appendToHtml = (title, rating, poster, year, genre, directors, actors, movieId) => {
     return `
     <div class="card h-100">
     ${hasPoster(poster)}
@@ -23,7 +23,8 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors) => {
     </div>
 
     <div class="card-footer">
-        <button class="btn btn-sm btn-secondary mx-1">Edit</button><button class=" btn btn-sm btn-danger mx-1">Remove</button>
+        <button  id= "editPost" class= " btn btn-sm btn-secondary mx-1">Edit</button>
+        <button  id="deletePost" class=" btn btn-sm btn-danger mx-1">Remove</button>
     </div>
  </div>
 `
@@ -77,7 +78,8 @@ function moviesRequest() {
                 let id = movie.id
                 console.log(id);
 
-                $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors))
+                $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
+
             })
         })
         .catch(error => errorMessage(error));
@@ -170,17 +172,17 @@ function loadingInterval() {
 setTimeout(loadingInterval, 0);
 
 
-function delete(movieId) {
+function deletePost(movieId) {
     fetch(url + `/${movieId}`  ,{
         method: 'DELETE',
     });
 }
 
 function edit(movieId) {
-    fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    fetch(url + `/${movieId}`, {
         method: 'PUT',
         body: JSON.stringify({
-            id: 1,
+            id: movieId,
             title: 'foo',
             body: 'bar',
             userId: 1,
@@ -192,3 +194,8 @@ function edit(movieId) {
         .then((response) => response.json())
         .then((json) => console.log(json));
 }
+$("#deletePost").click(function () {
+    deletePost();
+});
+
+
