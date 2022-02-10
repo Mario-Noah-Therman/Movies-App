@@ -29,9 +29,52 @@
 <!--attention-->
 <div class="jumbotron jumbotron-fluid mb-0 bg_linear_grad">
     <div class="container">
-        <h1 class="display-4">Movie Application</h1>
+        <div class="row">
+        <div class="col text-center">
+        <h1 class="display-4 ">Movie Application</h1>
         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea quibusdam sequi soluta.</p>
-        <button class="btn btn-success">lorem</button>
+        </div>
+        <div class="col">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputTitle">Title</label>
+                    <input type="text" class="form-control" id="inputTitle">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputYear">Year</label>
+                    <input type="text" class="form-control" id="inputYear">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Genre's</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="All the Genre's">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Actors</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Who was in it?">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Movie Thumbnail</label>
+                    <input type="text" class="form-control" id="inputCity" placeholder="Drop movie image URL here!">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">Rating</label>
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+            <button  id= "addPost" class= " btn btn-primary mx-1">Add</button>
+        </form>
+        </div>
+        </div>
     </div>
 </div>
 <!--Attention ends-->
@@ -43,7 +86,6 @@
 </div>
 <button  id="deletePost" class=" btn btn-sm btn-danger mx-1">Remove</button>
 <button  id= "editPost" class= " btn btn-sm btn-secondary mx-1">Edit</button>
-<button  id= "addPost" class= " btn btn-sm btn-secondary mx-1">Add</button>
 
 
 <!--Footer-->

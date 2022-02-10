@@ -73,6 +73,8 @@ function moviesRequest() {
         .catch(error => errorMessage(error));
 }
 
+let mTitle= $("#inputTitle").val();
+
 //this function adds a new movie by post request
 function addNewMovie() {
     // data = {title: 'movie-title'};
@@ -81,7 +83,7 @@ function addNewMovie() {
         method: 'POST',
         body: JSON.stringify({
             id: 2,
-            title: 'looooooooodddkdkdkdkd',
+            title: mTitle,
             body: 'bar',
             userId: 1,
         }),// or 'PUT'
