@@ -75,6 +75,8 @@ function moviesRequest() {
                 let directors = movie.directors
                 let actors = movie.actors
                 let id = movie.id
+                console.log(id);
+
                 $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors))
             })
         })
@@ -168,3 +170,25 @@ function loadingInterval() {
 setTimeout(loadingInterval, 0);
 
 
+function delete(movieId) {
+    fetch(url + `/${movieId}`  ,{
+        method: 'DELETE',
+    });
+}
+
+function edit(movieId) {
+    fetch('https://jsonplaceholder.typicode.com/posts/1', {
+        method: 'PUT',
+        body: JSON.stringify({
+            id: 1,
+            title: 'foo',
+            body: 'bar',
+            userId: 1,
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+}
