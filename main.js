@@ -23,23 +23,11 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
     </div>
 
     <div class="card-footer">
-        <button  id= "editPost" class= " btn btn-sm btn-secondary mx-1">Edit</button>
-        <button  id="deletePost" class=" btn btn-sm btn-danger mx-1">Remove</button>
+<!--        <button  id= "editPost" class= " btn btn-sm btn-secondary mx-1">Edit</button>-->
+<!--        <button  id="deletePost" class=" btn btn-sm btn-danger mx-1">Remove</button>-->
     </div>
  </div>
 `
-
-//         < div
-//     className = "card-body" >
-//         < h5
-//     className = "card-title" >${isUndefined(title)} < /h5>
-//     <div className="card-text">${isUndefined(rating)}</div>
-//     <div className="card-text">${isUndefined(year)}</div>
-//     <div className="card-text">${isUndefined(genre)}</div>
-//     <div className="card-text">${isUndefined(directors)}</div>
-//     <div className="card-text">${isUndefined(actors)}</div>
-// </div>
-
 }
 
 let isUndefined = (content) => {
@@ -86,19 +74,25 @@ function moviesRequest() {
 }
 
 //this function adds a new movie by post request
-function addNewMovie(data) {
-    data = {title: 'movie-title'};
+function addNewMovie() {
+    // data = {title: 'movie-title'};
 
-    fetch(url, {
-        method: 'POST', // or 'PUT'
+    fetch(url,{
+        method: 'POST',
+        body: JSON.stringify({
+            id: 2,
+            title: 'looooooooodddkdkdkdkd',
+            body: 'bar',
+            userId: 1,
+        }),// or 'PUT'
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        // body: JSON.stringify(data),
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
+            console.log(data);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -106,11 +100,11 @@ function addNewMovie(data) {
 }
 
 //when you click the button, it gets the user data into the POST request.
-$('#addNewMovie').click(e => {
-    e.preventDefault()
-    let data = $('#movieInfo').val();
-    addNewMovie(data);
-});
+// $('#addNewMovie').click(e => {
+//     e.preventDefault()
+//     let data = $('#movieInfo').val();
+//     addNewMovie(data);
+// });
 
 //add a scroll animation to the page
 /*let scrollTarget = document.getElementById('targetScroll');
@@ -172,17 +166,19 @@ function loadingInterval() {
 setTimeout(loadingInterval, 0);
 
 
-function deletePost(movieId) {
-    fetch(url + `/${movieId}`  ,{
+function deletePost() {
+    fetch(url + `/2`  ,{
         method: 'DELETE',
-    });
+    }).then((response) => response.json())
+        .then((json) => console.log(json));
+
 }
 
-function edit(movieId) {
-    fetch(url + `/${movieId}`, {
+function edit() {
+    fetch(url + `/4`, {
         method: 'PUT',
         body: JSON.stringify({
-            id: movieId,
+            id: 2,
             title: 'foo',
             body: 'bar',
             userId: 1,
@@ -194,8 +190,17 @@ function edit(movieId) {
         .then((response) => response.json())
         .then((json) => console.log(json));
 }
+
 $("#deletePost").click(function () {
     deletePost();
+});
+
+$("#editPost").click(function () {
+    edit();
+});
+
+$("#addPost").click(function () {
+    addNewMovie();
 });
 
 
