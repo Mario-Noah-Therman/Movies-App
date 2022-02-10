@@ -10,9 +10,8 @@
 .curtain_left , .curtain_right{
     z-index: 9999;
     position: absolute;
-    height: 100vh;
-    width: 100%;
     padding: 0;
+    height: 100%;
 }
 
 .curtain_left {
@@ -46,3 +45,23 @@
         width: 0%;
     }
 }
+
+@keyframes circle {
+    from {
+        border-radius: 100%;
+        background-color: magenta;
+        opacity: 1;
+    }
+    to {
+        border-radius: 0%;
+        background-color: darkmagenta;
+        opacity: 0.5;
+    }
+}
+
+.ripple {
+    animation-duration: 3s;
+    animation-name: circle;
+    z-index: 10;
+}
+

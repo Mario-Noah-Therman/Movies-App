@@ -29,7 +29,7 @@ function moviesRequest() {
                     actors: movie.actors
                 }
                 //append to html here
-/*                $('data').append(appendToHtml(movieLib))*/
+                /*                $('data').append(appendToHtml(movieLib))*/
             })
         })
         .catch(error => errorMessage(error));
@@ -58,17 +58,34 @@ function addNewMovie() {
             console.error('Error:', error);
         });
 }
+
 //add a scroll animation to the page
-    let scrollTarget = document.getElementById('targetScroll');
-    let scrollTarget2 = document.getElementById('targetScroll2')
-    window.document.addEventListener('scroll', function () {
-        if(window.scrollY > scrollTarget.scrollTop) {
-            console.log('active');
-            scrollTarget.classList.add('curtain_left');
-            scrollTarget2.classList.add('curtain_right');
-        } else if (window.scrollY < 50){
-            console.log('removed');
-            scrollTarget.classList.remove('curtain_left');
-            scrollTarget2.classList.remove('curtain_right');
-        }
-    })
+let scrollTarget = document.getElementById('targetScroll');
+let scrollTarget2 = document.getElementById('targetScroll2')
+window.document.addEventListener('scroll', function () {
+    if (window.scrollY > scrollTarget.scrollTop) {
+        console.log('active');
+        scrollTarget.classList.add('curtain_left');
+        scrollTarget2.classList.add('curtain_right');
+    } else if (window.scrollY < 10) {
+        console.log('removed');
+        scrollTarget.classList.remove('curtain_left');
+        scrollTarget2.classList.remove('curtain_right');
+    }
+})
+
+let addRippleEffect = e => {
+    let btn = e.currentTarget;
+    btn.classList.add('ripple');
+    let ripple = btn.getElementsByClassName('ripple');
+    if(ripple) {
+        ripple.remove()
+        console.log('removed')
+
+    }
+}
+
+const buttons = document.getElementsByTagName('button');
+for (const button of buttons) {
+    button.addEventListener('click', addRippleEffect)
+}
