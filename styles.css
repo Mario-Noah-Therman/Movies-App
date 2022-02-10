@@ -65,7 +65,7 @@
     z-index: 10;
 }
 
-#loading
+/*#loading
 {
     position:fixed;
     _position:absolute;
@@ -75,4 +75,4 @@
     z-index: 5000;
     background-color:#CF4342;
     color:#fff;
-}
+}*/

@@ -3,8 +3,8 @@ let url = 'https://gelatinous-cord-feather.glitch.me/movies';
 //will display and error Message on the html page
 function errorMessage(error) {
     console.log('error')
+    //append some error message to html page
 }
-
 //this function adds tables and stuff to html doc
 let appendToHtml = (title, rating, poster, year, genre, directors, actors) => {
     return `
@@ -25,6 +25,7 @@ let isUndefined = (content) =>{
         return content
     }
 }
+
 let hasPoster = poster => {
     if(poster === undefined){
         return ''
@@ -32,7 +33,6 @@ let hasPoster = poster => {
         return `<img src="${poster}">`
     }
 }
-
 //this function does the fetch request from the API to receive movie info
 function moviesRequest() {
     /*  loading();*/
@@ -55,9 +55,6 @@ function moviesRequest() {
         })
         .catch(error => errorMessage(error));
 }
-
-moviesRequest();
-
 //this function adds a new movie by post request
 function addNewMovie(data) {
     data = {title: 'movie-title'};
@@ -107,7 +104,6 @@ let addRippleEffect = e => {
 
     }
 }
-
 //adds animation to all buttons on the DOM
 const buttons = document.getElementsByTagName('button');
 for (const button of buttons) {
@@ -125,12 +121,21 @@ function loading() {
 
 //clears loading spinner
 function clearLoading() {
-    $('#loading').text('');
+    $('#loading').empty();
 }
 
 /*HTML Manipulation*/
-function test() {
-    $('.header-two').text('Hello Visiters')
+loading()
+
+function loadingInterval() {
+    $(document).ready(function () {
+        console.log('cleared');
+        clearLoading()
+        moviesRequest();
+    })
+    //where we will write functionality.
 }
 
-setInterval(test, 6000);
+setTimeout(loadingInterval, 1000);
+
+
