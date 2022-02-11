@@ -1,5 +1,5 @@
-let url = 'https://gelatinous-cord-feather.glitch.me/movies';
-
+let url = 'https://gelatinous-cord-feather.glitch.me/movies',
+    givenId = 15;
 //will display and error Message on the html page
 function errorMessage(error) {
     console.log('error')
@@ -126,6 +126,7 @@ function moviesRequest() {
             /*  clearLoading();*/
             movies.forEach(movie => {
                 //we created our own library
+                let id = movie.id
                 let title = movie.title
                 let rating = movie.rating
                 let poster = movie.poster
@@ -133,7 +134,6 @@ function moviesRequest() {
                 let genre = movie.genre
                 let director = movie.director
                 let actors = movie.actors
-                let id = movie.id
 
                 $('#data').empty();
 
@@ -158,11 +158,13 @@ function moviesRequest() {
                             genre: $("#editGenre").val(),
                             actors: $("#editActors").val(),
                             poster: $("#editImg").val(),
-                            rating: $("#editRating").val()
+                            rating: $("#editRating").val(),
+                            id: id
                         }
+                        console.log(data.id)
                         //for testing
                         /*    console.log(data)*/
-                        edit(data, id)
+                        edit(data)
                     });
                 }
                 one().then(two)
@@ -180,11 +182,13 @@ $("#addPost").click(function (e) {
         genre: $("#inputGenre").val(),
         actors: $("#inputActors").val(),
         poster: $("#inputImg").val(),
-        rating: $("#inputRating").val()
+        rating: $("#inputRating").val(),
+        id: givenId
     }
     //for testing
     /*    console.log(data)*/
     addNewMovie(data)
+    givenId++
 });
 
 
@@ -281,12 +285,12 @@ function deletePost(id) {
 
 
 //this edits the current post
-function edit(data ,id) {
-    fetch(url + `/${id}`, {
+function edit(data) {
+    fetch(url + '/' + data.id, {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {
-            'Content-type': 'application/json; charset=UTF-8',
+            'Content-type': 'application/json',
         },
     })
         .then((response) => response.json())
