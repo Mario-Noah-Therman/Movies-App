@@ -25,7 +25,7 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
     <div class="card-footer">
     <button id="${movieId}" class="btn btn-sm btn-primary">Test</button>
 <!--        <button  id= "editPost" class= " btn btn-sm btn-secondary mx-1">Edit</button>-->
-<!--        <button  id="deletePost" class=" btn btn-sm btn-danger mx-1">Remove</button>-->
+        <button  id="deletePost" class=" btn btn-sm btn-danger mx-1">Remove</button>
     </div>
  </div>
 `
@@ -82,40 +82,47 @@ function moviesRequest() {
                     })
                 }
                 function two() {
-                    buttonClick(id)
+                    $("#deletePost").click(function () {
+                        deletePost();
+                    });
                 }
                 one().then(two)
             })
         })
         .catch(error => errorMessage(error));
 }
+$("#addPost").click(function (e) {
+    e.preventDefault()
+    data = { mTitle: $("#inputTitle").val(),
+         mYear: $("#inputYear").val(),
+         mGenre: $("#inputGenre").val(),
+         mActors: $("#inputActors").val(),
+         mImg: $("#inputImg").val(),
+         mRating: $("#inputRating").val()}
+        console.log(data)
+    addNewMovie(data)
+});
 
-let mTitle= $("#inputTitle").val();
 
 //this function adds a new movie by post request
-function addNewMovie() {
+function addNewMovie(data) {
     // data = {title: 'movie-title'};
 
     fetch(url,{
         method: 'POST',
-        body: JSON.stringify({
-            id: 2,
-            title: mTitle,
-            body: 'bar',
-            userId: 1,
-        }),// or 'PUT'
         headers: {
             'Content-Type': 'application/json',
         },
-        // body: JSON.stringify(data),
+        body: JSON.stringify(data),
     })
         .then(response => response.json())
         .then(data => {
+            $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
             console.log(data);
         })
         .catch((error) => {
             console.error('Error:', error);
-        });$('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
+        });
 }
 
 
@@ -178,19 +185,19 @@ function loadingInterval() {
 setTimeout(loadingInterval, 0);
 
 
-function deletePost() {
-    fetch(url + `/2`  ,{
+function deletePost(id) {
+    fetch(url + `/${id}`  ,{
         method: 'DELETE',
     }).then((response) => response.json())
         .then((json) => console.log(json));
 
 }
 
-function edit() {
-    fetch(url + `/4`, {
+function edit(id) {
+    fetch(url + `/${id}`, {
         method: 'PUT',
         body: JSON.stringify({
-            id: 2,
+            id: id,
             title: 'foo',
             body: 'bar',
             userId: 1,
@@ -211,8 +218,6 @@ $("#editPost").click(function () {
     edit();
 });
 
-$("#addPost").click(function () {
-    addNewMovie();
-});
+
 
 
