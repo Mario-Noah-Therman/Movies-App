@@ -84,13 +84,13 @@ function moviesRequest() {
                 }
 
                 function two() {
-                        $("#deletePost" + id).click(function () {
-                            deletePost(id);
-                        });
+                    $("#deletePost" + id).click(function () {
+                        deletePost(id);
+                    });
 
-                        $("#editPost" + id).click(function () {
-                            edit(id);
-                        });
+                    $("#editPost" + id).click(function () {
+                        edit(id);
+                    });
                 }
 
                 one().then(two)
@@ -111,7 +111,7 @@ $("#addPost").click(function (e) {
         mRating: $("#inputRating").val()
     }
     //for testing
-/*    console.log(data)*/
+    /*    console.log(data)*/
     addNewMovie(data)
 });
 
