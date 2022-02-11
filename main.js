@@ -23,7 +23,68 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
         </p>
     </div>
     <div class="card-footer">
-    <button  id= "editPost${movieId}" class= " btn btn-sm btn-secondary mx-1">Edit</button>-
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalEdit">
+    Edit
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="editTitle">Title</label>
+                            <input type="text" class="form-control" id="editTitle">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editYear">Year</label>
+                            <input type="text" class="form-control" id="editYear">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editGenre">Genre's</label>
+                        <input type="text" class="form-control" id="editGenre" placeholder="All the Genre's">
+                    </div>
+                    <div class="form-group">
+                        <label for="editActors">Actors</label>
+                        <input type="text" class="form-control" id="editActors" placeholder="Who was in it?">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="editImg">Movie Thumbnail</label>
+                            <input type="text" class="form-control" id="editImg" placeholder="Drop movie image URL here!">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editRating">Rating</label>
+                            <select id="editRating" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Y-7</option>
+                                <option>G</option>
+                                <option>PG</option>
+                                <option>PG-13</option>
+                                <option>R</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="editData${movieId}">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
         <button  id="deletePost${movieId}" class=" btn btn-sm btn-danger mx-1">Remove</button>
     </div>
  </div>
@@ -88,8 +149,19 @@ function moviesRequest() {
                         deletePost(id);
                     });
 
-                    $("#editPost" + id).click(function () {
-                        edit(id);
+                    $("#editData" + id).click(function (e) {
+                        e.preventDefault()
+                        data = {
+                            mTitle: $("#editTitle").val(),
+                            mYear: $("#editYear").val(),
+                            mGenre: $("#editGenre").val(),
+                            mActors: $("#editActors").val(),
+                            mImg: $("#editImg").val(),
+                            mRating: $("#editRating").val()
+                        }
+                        //for testing
+                        /*    console.log(data)*/
+                        edit(data, id)
                     });
                 }
 
@@ -127,9 +199,9 @@ function addNewMovie(data) {
         body: JSON.stringify(data),
     })
         .then(response => response.json())
-        .then(data => {
-            $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
-            console.log(data);
+        .then( () => {
+            moviesRequest();
+/*            console.log(data);*/
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -203,12 +275,13 @@ function deletePost(id) {
     fetch(url + `/${id}`, {
         method: 'DELETE',
     }).then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((json) => {console.log(json)});
 
 }
 
+
 //this edits the current post
-function edit(id) {
+function edit(data ,id) {
     fetch(url + `/${id}`, {
         method: 'PUT',
         body: JSON.stringify({
