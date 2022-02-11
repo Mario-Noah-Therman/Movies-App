@@ -69,6 +69,7 @@
 
 .bg_linear_grad{
     background-image: linear-gradient(rgba(131, 3, 3, 0.46), rgba(130, 5, 5, 0.44));
+
 }
 
 .nav_linear_grad {
@@ -81,4 +82,11 @@
 
 .main_bg_color {
     color: rgba(0, 0, 0, 0.79);
+
+}
+h1 {
+color: whitesmoke;
+}
+h1:hover {
+    color: gold;
 }
