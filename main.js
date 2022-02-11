@@ -79,7 +79,7 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="editData${movieId}">Save changes</button>
+                <button type="button" class="btn btn-primary" id="editData${movieId}" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>
@@ -284,12 +284,7 @@ function deletePost(id) {
 function edit(data ,id) {
     fetch(url + `/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({
-            id: id,
-            title: 'foo',
-            body: 'bar',
-            userId: 1,
-        }),
+        body: JSON.stringify(data),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
