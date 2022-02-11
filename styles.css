@@ -73,7 +73,7 @@
 }
 
 .nav_linear_grad {
-    background-image: linear-gradient(rgba(73, 108, 213, 0.5), rgba(69, 75, 128, 0.6));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0));
 }
 
 .footer_bg {
@@ -88,5 +88,20 @@ h1 {
 color: whitesmoke;
 }
 h1:hover {
-    color: gold;
+    color: darkred;
+}
+label {
+    color: whitesmoke;
+
+}
+input {
+box-shadow: 0 0 3px 3px darkred;
+}
+
+body {
+    font-family: 'Abril Fatface', cursive;
+background-color: black;
+}
+.lead {
+    color: whitesmoke;
 }
