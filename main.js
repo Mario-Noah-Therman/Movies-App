@@ -23,21 +23,22 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
         </p>
     </div>
     <div class="card-footer">
-    <button id="${movieId}" class="btn btn-sm btn-primary">Test</button>
-<!--        <button  id= "editPost" class= " btn btn-sm btn-secondary mx-1">Edit</button>-->
-        <button  id="deletePost" class=" btn btn-sm btn-danger mx-1">Remove</button>
+    <button  id= "editPost${movieId}" class= " btn btn-sm btn-secondary mx-1">Edit</button>-
+        <button  id="deletePost${movieId}" class=" btn btn-sm btn-danger mx-1">Remove</button>
     </div>
  </div>
 `
 }
 
-function buttonClick(movieId) {
+//this function test purposes on;y
+/*function buttonClick(movieId) {
     $('#' + movieId).click(function (e) {
         e.preventDefault()
         console.log('clicked' + movieId)
     })
-}
+}*/
 
+//this function checks if the content we pull has content, if not; then we return an empty string
 let isUndefined = (content) => {
     if (content === undefined) {
         return ''
@@ -45,7 +46,7 @@ let isUndefined = (content) => {
         return content
     }
 }
-
+//this function checks to see if we have a poster/thumbnail for the movie
 let hasPoster = poster => {
     if (poster === undefined) {
         return ''
@@ -74,32 +75,43 @@ function moviesRequest() {
                 let id = movie.id
 
                 function one() {
-                    return new Promise(function(resolve, reject) {
-                        setTimeout(function() {
+                    return new Promise(function (resolve, reject) {
+                        setTimeout(function () {
                             $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
                             resolve();
                         }, 1000);
                     })
                 }
+
                 function two() {
-                    $("#deletePost").click(function () {
-                        deletePost();
-                    });
+                        $("#deletePost" + id).click(function () {
+                            deletePost(id);
+                        });
+
+                        $("#editPost" + id).click(function () {
+                            edit(id);
+                        });
                 }
+
                 one().then(two)
             })
         })
         .catch(error => errorMessage(error));
 }
+
+//when you click the 'add' button, we add a new post
 $("#addPost").click(function (e) {
     e.preventDefault()
-    data = { mTitle: $("#inputTitle").val(),
-         mYear: $("#inputYear").val(),
-         mGenre: $("#inputGenre").val(),
-         mActors: $("#inputActors").val(),
-         mImg: $("#inputImg").val(),
-         mRating: $("#inputRating").val()}
-        console.log(data)
+    data = {
+        mTitle: $("#inputTitle").val(),
+        mYear: $("#inputYear").val(),
+        mGenre: $("#inputGenre").val(),
+        mActors: $("#inputActors").val(),
+        mImg: $("#inputImg").val(),
+        mRating: $("#inputRating").val()
+    }
+    //for testing
+/*    console.log(data)*/
     addNewMovie(data)
 });
 
@@ -107,8 +119,7 @@ $("#addPost").click(function (e) {
 //this function adds a new movie by post request
 function addNewMovie(data) {
     // data = {title: 'movie-title'};
-
-    fetch(url,{
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -125,7 +136,6 @@ function addNewMovie(data) {
         });
 }
 
-
 //add a scroll animation to the page
 /*let scrollTarget = document.getElementById('targetScroll');
 let scrollTarget2 = document.getElementById('targetScroll2')
@@ -139,6 +149,7 @@ window.document.addEventListener('scroll', function () {
     }
 })*/
 
+//adds ripple effect to buttons
 let addRippleEffect = e => {
     let btn = e.currentTarget;
     btn.classList.add('ripple');
@@ -149,11 +160,12 @@ let addRippleEffect = e => {
 
     }
 }
+
 //adds animation to all buttons on the DOM
-const buttons = document.getElementsByTagName('button');
+/*const buttons = document.getElementsByTagName('button');
 for (const button of buttons) {
     button.addEventListener('click', addRippleEffect)
-}
+}*/
 
 //makes a loading spinner via bootstrap.
 function loading() {
@@ -182,17 +194,20 @@ function loadingInterval() {
     })
     //where we will write functionality.
 }
+
+//loads the page
 setTimeout(loadingInterval, 0);
 
-
+//this function deletes posts from wherever we call it
 function deletePost(id) {
-    fetch(url + `/${id}`  ,{
+    fetch(url + `/${id}`, {
         method: 'DELETE',
     }).then((response) => response.json())
         .then((json) => console.log(json));
 
 }
 
+//this edits the current post
 function edit(id) {
     fetch(url + `/${id}`, {
         method: 'PUT',
@@ -210,13 +225,7 @@ function edit(id) {
         .then((json) => console.log(json));
 }
 
-$("#deletePost").click(function () {
-    deletePost();
-});
 
-$("#editPost").click(function () {
-    edit();
-});
 
 
 
