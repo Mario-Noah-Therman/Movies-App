@@ -8,6 +8,7 @@ function errorMessage(error) {
 
 //this function adds tables and stuff to html doc
 let appendToHtml = (title, rating, poster, year, genre, directors, actors, movieId) => {
+    console.log(movieId)
     return `
     <div class="card h-100">
     ${hasPoster(poster)}
@@ -21,13 +22,20 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
         ${isUndefined(actors)}<br>
         </p>
     </div>
-
     <div class="card-footer">
+    <button id="${movieId}" class="btn btn-sm btn-primary">Test</button>
 <!--        <button  id= "editPost" class= " btn btn-sm btn-secondary mx-1">Edit</button>-->
 <!--        <button  id="deletePost" class=" btn btn-sm btn-danger mx-1">Remove</button>-->
     </div>
  </div>
 `
+}
+
+function buttonClick(movieId) {
+    $('#' + movieId).click(function (e) {
+        e.preventDefault()
+        console.log('clicked' + movieId)
+    })
 }
 
 let isUndefined = (content) => {
@@ -64,10 +72,19 @@ function moviesRequest() {
                 let directors = movie.directors
                 let actors = movie.actors
                 let id = movie.id
-                console.log(id);
 
-                $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
-
+                function one() {
+                    return new Promise(function(resolve, reject) {
+                        setTimeout(function() {
+                            $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
+                            resolve();
+                        }, 1000);
+                    })
+                }
+                function two() {
+                    buttonClick(id)
+                }
+                one().then(two)
             })
         })
         .catch(error => errorMessage(error));
@@ -98,15 +115,9 @@ function addNewMovie() {
         })
         .catch((error) => {
             console.error('Error:', error);
-        });
+        });$('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
 }
 
-//when you click the button, it gets the user data into the POST request.
-// $('#addNewMovie').click(e => {
-//     e.preventDefault()
-//     let data = $('#movieInfo').val();
-//     addNewMovie(data);
-// });
 
 //add a scroll animation to the page
 /*let scrollTarget = document.getElementById('targetScroll');
@@ -164,7 +175,6 @@ function loadingInterval() {
     })
     //where we will write functionality.
 }
-
 setTimeout(loadingInterval, 0);
 
 
