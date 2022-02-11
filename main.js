@@ -8,7 +8,7 @@ function errorMessage(error) {
 
 //this function adds tables and stuff to html doc
 let appendToHtml = (title, rating, poster, year, genre, directors, actors, movieId) => {
-    console.log(movieId)
+
     return `
     <div class="card h-100">
     ${hasPoster(poster)}
@@ -126,13 +126,13 @@ function moviesRequest() {
             /*  clearLoading();*/
             movies.forEach(movie => {
                 //we created our own library
-                let title = movie.mTitle
-                let rating = movie.mRating
-                let poster = movie.mImg
-                let year = movie.mYear
-                let genre = movie.mGenre
-                let directors = movie.mDirectors
-                let actors = movie.mActors
+                let title = movie.title
+                let rating = movie.rating
+                let poster = movie.poster
+                let year = movie.year
+                let genre = movie.genre
+                let director = movie.director
+                let actors = movie.actors
                 let id = movie.id
 
                 $('#data').empty();
@@ -140,7 +140,7 @@ function moviesRequest() {
                 function one() {
                     return new Promise(function (resolve, reject) {
                         setTimeout(function () {
-                            $('#data').append(appendToHtml(title, rating, poster, year, genre, directors, actors, id))
+                            $('#data').append(appendToHtml(title, rating, poster, year, genre, director, actors, id))
                             resolve();
                         }, 1000);
                     })
@@ -153,12 +153,12 @@ function moviesRequest() {
                     $("#editData" + id).click(function (e) {
                         e.preventDefault()
                         data = {
-                            mTitle: $("#editTitle").val(),
-                            mYear: $("#editYear").val(),
-                            mGenre: $("#editGenre").val(),
-                            mActors: $("#editActors").val(),
-                            mImg: $("#editImg").val(),
-                            mRating: $("#editRating").val()
+                            title: $("#editTitle").val(),
+                            year: $("#editYear").val(),
+                            genre: $("#editGenre").val(),
+                            actors: $("#editActors").val(),
+                            poster: $("#editImg").val(),
+                            rating: $("#editRating").val()
                         }
                         //for testing
                         /*    console.log(data)*/
@@ -175,12 +175,12 @@ function moviesRequest() {
 $("#addPost").click(function (e) {
     e.preventDefault()
     data = {
-        mTitle: $("#inputTitle").val(),
-        mYear: $("#inputYear").val(),
-        mGenre: $("#inputGenre").val(),
-        mActors: $("#inputActors").val(),
-        mImg: $("#inputImg").val(),
-        mRating: $("#inputRating").val()
+        title: $("#inputTitle").val(),
+        year: $("#inputYear").val(),
+        genre: $("#inputGenre").val(),
+        actors: $("#inputActors").val(),
+        poster: $("#inputImg").val(),
+        rating: $("#inputRating").val()
     }
     //for testing
     /*    console.log(data)*/
