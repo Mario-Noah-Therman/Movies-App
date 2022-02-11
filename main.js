@@ -126,14 +126,16 @@ function moviesRequest() {
             /*  clearLoading();*/
             movies.forEach(movie => {
                 //we created our own library
-                let title = movie.title
-                let rating = movie.rating
-                let poster = movie.poster
-                let year = movie.year
-                let genre = movie.genre
-                let directors = movie.directors
-                let actors = movie.actors
+                let title = movie.mTitle
+                let rating = movie.mRating
+                let poster = movie.mImg
+                let year = movie.mYear
+                let genre = movie.mGenre
+                let directors = movie.mDirectors
+                let actors = movie.mActors
                 let id = movie.id
+
+                $('#data').empty();
 
                 function one() {
                     return new Promise(function (resolve, reject) {
@@ -148,7 +150,6 @@ function moviesRequest() {
                     $("#deletePost" + id).click(function () {
                         deletePost(id);
                     });
-
                     $("#editData" + id).click(function (e) {
                         e.preventDefault()
                         data = {
@@ -164,7 +165,6 @@ function moviesRequest() {
                         edit(data, id)
                     });
                 }
-
                 one().then(two)
             })
         })
@@ -275,7 +275,7 @@ function deletePost(id) {
     fetch(url + `/${id}`, {
         method: 'DELETE',
     }).then((response) => response.json())
-        .then((json) => {console.log(json)});
+        .then((json) => moviesRequest());
 
 }
 
@@ -290,7 +290,7 @@ function edit(data ,id) {
         },
     })
         .then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((json) => moviesRequest());
 }
 
 
