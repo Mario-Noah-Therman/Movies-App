@@ -112,7 +112,7 @@ let hasPoster = poster => {
     if (poster === undefined) {
         return ''
     } else {
-        return `<img src="${poster}" class="card-img-top" style="width=200; height=300px;"  alt="...">`
+        return `<img src="${poster}" class="size" alt="...">`
     }
 }
 

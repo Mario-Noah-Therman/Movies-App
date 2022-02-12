@@ -105,3 +105,20 @@ background-color: black;
 .lead {
     color: whitesmoke;
 }
+
+.size{
+    height: 298px;
+    width: 188px;
+}
+
+.font{
+    font-family: 'Monoton', cursive;
+}
+
+.bigText{
+    font-size: x-large;
+}
+
+.marginL{
+    margin-left: 265px;
+}
