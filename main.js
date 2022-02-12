@@ -11,84 +11,93 @@ function errorMessage(error) {
 let appendToHtml = (title, rating, poster, year, genre, directors, actors, movieId) => {
 
     return `
-    <div class="card h-100">
+<!--here-->
+<div class="card h-100">
     ${hasPoster(poster)}
-        <div class="card-body text-center">
+    <div class="card-body text-center">
         <h5>${isUndefined(title)}</h5>
         <p class="card-text">
-        ${isUndefined(rating)}<br>
-        ${isUndefined(year)}<br>
-        ${isUndefined(genre)}<br>
-        ${isUndefined(directors)}<br>
-        ${isUndefined(actors)}<br>
+            ${isUndefined(rating)}<br>
+            ${isUndefined(year)}<br>
+            ${isUndefined(genre)}<br>
+            ${isUndefined(directors)}<br>
+            ${isUndefined(actors)}<br>
         </p>
     </div>
     <div class="card-footer">
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalEdit${movieId}">
-    Edit
-</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalEdit${movieId}">
+            Edit
+        </button>
 
-<!-- Modal -->
-<div class="modal fade" id="modalEdit${movieId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="editTitle">Title</label>
-                            <input type="text" class="form-control" id="editTitle${movieId}">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="editYear">Year</label>
-                            <input type="text" class="form-control" id="editYear${movieId}">
-                        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modalEdit${movieId}" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="editGenre">Genre's</label>
-                        <input type="text" class="form-control" id="editGenre${movieId}" placeholder="All the Genre's">
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="editTitle">Title</label>
+                                    <input type="text" class="form-control" id="editTitle${movieId}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="editYear">Year</label>
+                                    <input type="text" class="form-control" id="editYear${movieId}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editGenre">Genre's</label>
+                                <input type="text" class="form-control" id="editGenre${movieId}"
+                                       placeholder="All the Genre's">
+                            </div>
+                            <div class="form-group">
+                                <label for="editActors">Actors</label>
+                                <input type="text" class="form-control" id="editActors${movieId}"
+                                       placeholder="Who was in it?">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="editImg">Movie Thumbnail</label>
+                                    <input type="text" class="form-control" id="editImg${movieId}"
+                                           placeholder="Drop movie image URL here!">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="editRating">Rating</label>
+                                    <select id="editRating${movieId}" class="form-control">
+                                        <option selected>Choose...</option>
+                                        <option>Y-7</option>
+                                        <option>G</option>
+                                        <option>PG</option>
+                                        <option>PG-13</option>
+                                        <option>R</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="editActors">Actors</label>
-                        <input type="text" class="form-control" id="editActors${movieId}" placeholder="Who was in it?">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="editData${movieId}" data-dismiss="modal">Save
+                            changes
+                        </button>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="editImg">Movie Thumbnail</label>
-                            <input type="text" class="form-control" id="editImg${movieId}" placeholder="Drop movie image URL here!">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="editRating">Rating</label>
-                            <select id="editRating${movieId}" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>Y-7</option>
-                                <option>G</option>
-                                <option>PG</option>
-                                <option>PG-13</option>
-                                <option>R</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="editData${movieId}" data-dismiss="modal">Save changes</button>
+                </div>
             </div>
         </div>
+
+        <button id="deletePost${movieId}" class=" btn btn-sm btn-danger mx-1">Remove</button>
     </div>
 </div>
 
-        <button  id="deletePost${movieId}" class=" btn btn-sm btn-danger mx-1">Remove</button>
-    </div>
- </div>
+<!--here-->
 `
 }
 
@@ -149,7 +158,7 @@ function moviesRequest() {
 
                 function two() {
                     $("#deletePost" + id).click(function () {
-                        //deletePost(id);
+                        deletePost(id);
                         console.log(id)
                     });
                     $("#editData" + movie.id).click(function (e) {
@@ -193,7 +202,6 @@ $("#addPost").click(function (e) {
     addNewMovie(data)
     givenId++
 });
-
 
 //this function adds a new movie by post request
 function addNewMovie(data) {
