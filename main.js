@@ -44,29 +44,29 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editTitle">Title</label>
-                            <input type="text" class="form-control" id="editTitle">
+                            <input type="text" class="form-control" id="editTitle${movieId}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editYear">Year</label>
-                            <input type="text" class="form-control" id="editYear">
+                            <input type="text" class="form-control" id="editYear${movieId}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="editGenre">Genre's</label>
-                        <input type="text" class="form-control" id="editGenre" placeholder="All the Genre's">
+                        <input type="text" class="form-control" id="editGenre${movieId}" placeholder="All the Genre's">
                     </div>
                     <div class="form-group">
                         <label for="editActors">Actors</label>
-                        <input type="text" class="form-control" id="editActors" placeholder="Who was in it?">
+                        <input type="text" class="form-control" id="editActors${movieId}" placeholder="Who was in it?">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editImg">Movie Thumbnail</label>
-                            <input type="text" class="form-control" id="editImg" placeholder="Drop movie image URL here!">
+                            <input type="text" class="form-control" id="editImg${movieId}" placeholder="Drop movie image URL here!">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editRating">Rating</label>
-                            <select id="editRating" class="form-control">
+                            <select id="editRating${movieId}" class="form-control">
                                 <option selected>Choose...</option>
                                 <option>Y-7</option>
                                 <option>G</option>
@@ -152,21 +152,22 @@ function moviesRequest() {
                         //deletePost(id);
                         console.log(id)
                     });
-                    $("#editData" + id).click(function (e) {
+                    $("#editData" + movie.id).click(function (e) {
+                        console.log(movie.id);
                         e.preventDefault()
                         data = {
-                            title: $("#editTitle").val(),
-                            year: $("#editYear").val(),
-                            genre: $("#editGenre").val(),
-                            actors: $("#editActors").val(),
-                            poster: $("#editImg").val(),
-                            rating: $("#editRating").val(),
-                            id: id
+                            title: $("#editTitle" + movie.id).val(),
+                            year: $("#editYear" + movie.id).val(),
+                            genre: $("#editGenre" + movie.id).val(),
+                            actors: $("#editActors" + movie.id).val(),
+                            poster: $("#editImg" + movie.id).val(),
+                            rating: $("#editRating" + movie.id).val(),
                         }
                         console.log(id)
                         //for testing
                         /*    console.log(data)*/
-                        edit(data, id);
+                        console.log(data);
+                       edit(data, movie.id);
                     });
                 }
                 one().then(two)
