@@ -1,5 +1,6 @@
 let url = 'https://gelatinous-cord-feather.glitch.me/movies',
     givenId = 15;
+
 //will display and error Message on the html page
 function errorMessage(error) {
     console.log('error')
@@ -24,12 +25,12 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
     </div>
     <div class="card-footer">
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalEdit">
+<button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalEdit${movieId}">
     Edit
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEdit${movieId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -148,7 +149,8 @@ function moviesRequest() {
 
                 function two() {
                     $("#deletePost" + id).click(function () {
-                        deletePost(id);
+                        //deletePost(id);
+                        console.log(id)
                     });
                     $("#editData" + id).click(function (e) {
                         e.preventDefault()
@@ -161,10 +163,10 @@ function moviesRequest() {
                             rating: $("#editRating").val(),
                             id: id
                         }
-                        console.log(data.id)
+                        console.log(id)
                         //for testing
                         /*    console.log(data)*/
-                        edit(data)
+                        edit(data, id);
                     });
                 }
                 one().then(two)
@@ -285,7 +287,7 @@ function deletePost(id) {
 
 
 //this edits the current post
-function edit(data) {
+function edit(data, id) {
     fetch(url + `/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
