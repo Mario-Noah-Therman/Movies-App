@@ -188,7 +188,7 @@ function moviesRequest() {
 //when you click the 'add' button, we add a new post
 $("#addPost").click(function (e) {
     e.preventDefault()
-    data = {
+    let data = {
         title: $("#inputTitle").val(),
         year: $("#inputYear").val(),
         genre: $("#inputGenre").val(),
@@ -199,14 +199,14 @@ $("#addPost").click(function (e) {
     }
     //for testing
     /*    console.log(data)*/
-    addNewMovie(data)
+    addNewMovie(data, data.id)
     givenId++
 });
 
 //this function adds a new movie by post request
 function addNewMovie(data) {
     // data = {title: 'movie-title'};
-    fetch(url, {
+    fetch(url , {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -237,7 +237,7 @@ window.document.addEventListener('scroll', function () {
 })*/
 
 //adds ripple effect to buttons
-let addRippleEffect = e => {
+/*let addRippleEffect = e => {
     let btn = e.currentTarget;
     btn.classList.add('ripple');
     let ripple = btn.getElementsByClassName('ripple');
@@ -246,13 +246,13 @@ let addRippleEffect = e => {
         console.log('removed')
 
     }
-}
+}*/
 
 //adds animation to all buttons on the DOM
-const buttons = document.getElementsByTagName('button');
+/*const buttons = document.getElementsByTagName('button');
 for (const button of buttons) {
     button.addEventListener('click', addRippleEffect)
-}
+}*/
 
 //makes a loading spinner via bootstrap.
 function loading() {
@@ -287,6 +287,7 @@ setTimeout(loadingInterval, 1000);
 
 //this function deletes posts from wherever we call it
 function deletePost(id) {
+    givenId--;
     fetch(url + `/${id}`, {
         method: 'DELETE',
     }).then((response) => response.json())
