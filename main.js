@@ -13,7 +13,7 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
     return `
 <!--here-->
 <div class="card h-100">
-    ${hasPoster(poster)}
+    ${hasPoster(poster, title)}
     <div class="card-body text-center">
         <h5>${isUndefined(title)}</h5>
         <p class="card-text">
@@ -34,9 +34,9 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
         <div class="modal fade" id="modalEdit${movieId}" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content bg-dark">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
+                        <h5 class="modal-title text-white" id="exampleModalLabel">Edit Movie</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -85,7 +85,7 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="editData${movieId}" data-dismiss="modal">Save
+                        <button type="button" class="btn btn-success" id="editData${movieId}" data-dismiss="modal">Save
                             changes
                         </button>
                     </div>
@@ -112,17 +112,18 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
 //this function checks if the content we pull has content, if not; then we return an empty string
 let isUndefined = (content) => {
     if (content === undefined) {
-        return ''
+        return 'missing content'
     } else {
         return content
     }
 }
 //this function checks to see if we have a poster/thumbnail for the movie
-let hasPoster = poster => {
-    if (poster === undefined) {
-        return ''
+let hasPoster = (poster, title) => {
+    console.log(poster);
+    if (!poster) {
+        return `<img src="https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png" class="size" alt="img_placeholder">`
     } else {
-        return `<img src="${poster}" class="size" alt="...">`
+        return `<img src="${poster}" class="size" alt="${title}_image">`
     }
 }
 
