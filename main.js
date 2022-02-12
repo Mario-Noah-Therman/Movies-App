@@ -286,7 +286,7 @@ function deletePost(id) {
 
 //this edits the current post
 function edit(data) {
-    fetch(url + '/' + data.id, {
+    fetch(url + `/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {
