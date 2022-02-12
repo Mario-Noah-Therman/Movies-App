@@ -249,10 +249,10 @@ let addRippleEffect = e => {
 }
 
 //adds animation to all buttons on the DOM
-/*const buttons = document.getElementsByTagName('button');
+const buttons = document.getElementsByTagName('button');
 for (const button of buttons) {
     button.addEventListener('click', addRippleEffect)
-}*/
+}
 
 //makes a loading spinner via bootstrap.
 function loading() {
@@ -283,7 +283,7 @@ function loadingInterval() {
 }
 
 //loads the page
-setTimeout(loadingInterval, 0);
+setTimeout(loadingInterval, 1000);
 
 //this function deletes posts from wherever we call it
 function deletePost(id) {
@@ -293,7 +293,6 @@ function deletePost(id) {
         .then((json) => moviesRequest());
 
 }
-
 
 //this edits the current post
 function edit(data, id) {

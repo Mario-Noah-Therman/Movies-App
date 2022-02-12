@@ -6,10 +6,11 @@
     position: absolute;
     padding: 0;
     height: 400vh;
+    background-color: black;
 }
 
 .curtain_left {
-    animation-duration: 2s;
+    animation-duration: 3s;
     animation-name: slide_left;
 }
 
