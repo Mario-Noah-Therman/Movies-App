@@ -1,5 +1,5 @@
 let url = 'https://gelatinous-cord-feather.glitch.me/movies',
-    givenId = 15;
+    givenId = 1;
 
 //will display and error Message on the html page
 function errorMessage(error) {
@@ -119,7 +119,6 @@ let isUndefined = (content) => {
 }
 //this function checks to see if we have a poster/thumbnail for the movie
 let hasPoster = (poster, title) => {
-    console.log(poster);
     if (!poster) {
         return `<img src="https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png" class="size" alt="img_placeholder">`
     } else {
@@ -145,13 +144,15 @@ function moviesRequest() {
                 let genre = movie.genre
                 let director = movie.director
                 let actors = movie.actors
+                givenId = id;
 
                 $('#data').empty();
 
                 function one() {
                     return new Promise(function (resolve, reject) {
                         setTimeout(function () {
-                            $('#data').append(appendToHtml(title, rating, poster, year, genre, director, actors, id))
+                            console.log(givenId)
+                            $('#data').append(appendToHtml(title, rating, poster, year, genre, director, actors, id));
                             resolve();
                         }, 1000);
                     })
@@ -189,6 +190,7 @@ function moviesRequest() {
 //when you click the 'add' button, we add a new post
 $("#addPost").click(function (e) {
     e.preventDefault()
+    givenId++
     data = {
         title: $("#inputTitle").val(),
         year: $("#inputYear").val(),
@@ -201,7 +203,6 @@ $("#addPost").click(function (e) {
     //for testing
     /*    console.log(data)*/
     addNewMovie(data)
-    givenId++
 });
 
 //this function adds a new movie by post request
@@ -238,7 +239,7 @@ window.document.addEventListener('scroll', function () {
 })*/
 
 //adds ripple effect to buttons
-let addRippleEffect = e => {
+/*let addRippleEffect = e => {
     let btn = e.currentTarget;
     btn.classList.add('ripple');
     let ripple = btn.getElementsByClassName('ripple');
@@ -247,13 +248,13 @@ let addRippleEffect = e => {
         console.log('removed')
 
     }
-}
+}*/
 
 //adds animation to all buttons on the DOM
-const buttons = document.getElementsByTagName('button');
+/*const buttons = document.getElementsByTagName('button');
 for (const button of buttons) {
     button.addEventListener('click', addRippleEffect)
-}
+}*/
 
 //makes a loading spinner via bootstrap.
 function loading() {
