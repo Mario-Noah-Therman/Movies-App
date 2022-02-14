@@ -74,11 +74,11 @@
 }
 
 .nav_linear_grad {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0));
+    background-image: linear-gradient(rgba(114, 0, 0, 0.7), rgba(0, 0, 0));
 }
 
 .footer_bg {
-    background-image: linear-gradient(rgba(73, 108, 213, 0.5), rgba(129, 34, 202, 0.6));
+    background-image: linear-gradient(rgba( 0, 0, 0, 0.44), rgba(129, 0, 0, 0.46));
 }
 
 .main_bg_color {
@@ -122,4 +122,20 @@ background-color: black;
 
 .marginL{
     margin-left: 265px;
+}
+.img-one {
+
+}
+.img-one:hover {
+    transform: scale(1.2);
+}
+
+#addPost {
+    color: whitesmoke;
+    background-color: darkred;
+    border: 2px solid goldenrod ;
+}
+#addPost:hover {
+    color: yellow;
+    transition: ease-in-out 0.3s;
 }
