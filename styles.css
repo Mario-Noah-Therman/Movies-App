@@ -74,11 +74,11 @@
 }
 
 .nav_linear_grad {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0));
+    background-image: linear-gradient(rgba(129, 0, 0, 0.6), rgba(0, 0, 0));
 }
 
 .footer_bg {
-    background-image: linear-gradient(rgba(73, 108, 213, 0.5), rgba(129, 34, 202, 0.6));
+    background-image: linear-gradient(rgba( 0, 0, 0, 0.5), rgba(129, 0, 0, 0.6));
 }
 
 .main_bg_color {
@@ -123,3 +123,52 @@ background-color: black;
 .marginL{
     margin-left: 265px;
 }
+.image-one {
+
+}
+.imag-one:hover {
+    transform: scale(1.2);
+}
+
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+height: 550px;
+    display: flex;
+
+
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: scroll;
+}
+.card {
+    border: 1px solid #eee;
+    margin: 0 5px;
+
+}
+/*revise inverted hover effect*/
+/*
+.card:hover {
+    border: 8px solid #eee;
+    transition: ease-in-out 0.4s;
+}
+*/
+
+/*@media only screen and (max-width: 1400px){
+    .card {
+
+        !*align-items: none;*!
+        margin-left: 15px;
+    }
+}
+@media only screen and (max-width: 768px){
+    .future-forecast{
+
+        !*align-items: none;*!
+
+      padding: 20px;
+    }
+}*/
