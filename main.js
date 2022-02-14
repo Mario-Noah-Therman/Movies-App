@@ -163,6 +163,8 @@ function moviesRequest() {
                         deletePost(id);
                         console.log(id)
                     });
+
+
                     $("#editData" + movie.id).click(function (e) {
                         console.log(movie.id);
                         e.preventDefault()
