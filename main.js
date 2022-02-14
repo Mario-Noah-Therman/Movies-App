@@ -13,7 +13,7 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
     return `
 <!--here-->
 <div class="card h-100">
-    ${hasPoster(poster)}
+    ${hasPoster(poster, title)}
     <div class="card-body text-center">
         <h5>${isUndefined(title)}</h5>
         <p class="card-text">
@@ -34,9 +34,9 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
         <div class="modal fade" id="modalEdit${movieId}" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content bg-dark">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
+                        <h5 class="modal-title text-white" id="exampleModalLabel">Edit Movie</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -85,7 +85,7 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="editData${movieId}" data-dismiss="modal">Save
+                        <button type="button" class="btn btn-success" id="editData${movieId}" data-dismiss="modal">Save
                             changes
                         </button>
                     </div>
@@ -112,17 +112,18 @@ let appendToHtml = (title, rating, poster, year, genre, directors, actors, movie
 //this function checks if the content we pull has content, if not; then we return an empty string
 let isUndefined = (content) => {
     if (content === undefined) {
-        return ''
+        return 'missing content'
     } else {
         return content
     }
 }
 //this function checks to see if we have a poster/thumbnail for the movie
-let hasPoster = poster => {
-    if (poster === undefined) {
-        return ''
+let hasPoster = (poster, title) => {
+    console.log(poster);
+    if (!poster) {
+        return `<img src="https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png" class="size" alt="img_placeholder">`
     } else {
-        return `<img src="${poster}" class="size" alt="...">`
+        return `<img src="${poster}" class="size" alt="${title}_image">`
     }
 }
 
@@ -176,7 +177,7 @@ function moviesRequest() {
                         //for testing
                         /*    console.log(data)*/
                         console.log(data);
-                       edit(data, movie.id);
+                        edit(data, movie.id);
                     });
                 }
                 one().then(two)
@@ -188,7 +189,7 @@ function moviesRequest() {
 //when you click the 'add' button, we add a new post
 $("#addPost").click(function (e) {
     e.preventDefault()
-    let data = {
+    data = {
         title: $("#inputTitle").val(),
         year: $("#inputYear").val(),
         genre: $("#inputGenre").val(),
@@ -199,14 +200,14 @@ $("#addPost").click(function (e) {
     }
     //for testing
     /*    console.log(data)*/
-    addNewMovie(data, data.id)
+    addNewMovie(data)
     givenId++
 });
 
 //this function adds a new movie by post request
 function addNewMovie(data) {
     // data = {title: 'movie-title'};
-    fetch(url , {
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -216,7 +217,7 @@ function addNewMovie(data) {
         .then(response => response.json())
         .then( () => {
             moviesRequest();
-/*            console.log(data);*/
+            /*            console.log(data);*/
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -237,7 +238,7 @@ window.document.addEventListener('scroll', function () {
 })*/
 
 //adds ripple effect to buttons
-/*let addRippleEffect = e => {
+let addRippleEffect = e => {
     let btn = e.currentTarget;
     btn.classList.add('ripple');
     let ripple = btn.getElementsByClassName('ripple');
@@ -246,13 +247,13 @@ window.document.addEventListener('scroll', function () {
         console.log('removed')
 
     }
-}*/
+}
 
 //adds animation to all buttons on the DOM
-/*const buttons = document.getElementsByTagName('button');
+const buttons = document.getElementsByTagName('button');
 for (const button of buttons) {
     button.addEventListener('click', addRippleEffect)
-}*/
+}
 
 //makes a loading spinner via bootstrap.
 function loading() {
@@ -287,7 +288,6 @@ setTimeout(loadingInterval, 1000);
 
 //this function deletes posts from wherever we call it
 function deletePost(id) {
-    givenId--;
     fetch(url + `/${id}`, {
         method: 'DELETE',
     }).then((response) => response.json())
@@ -307,8 +307,6 @@ function edit(data, id) {
         .then((response) => response.json())
         .then((json) => moviesRequest());
 }
-
-
 
 
 
